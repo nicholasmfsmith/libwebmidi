@@ -1,27 +1,17 @@
 extern crate webmidi;
 
-fn main() {
-	let wmi = webmidi::WebMidiInput::new(String::from("Test input Stream"));
+use webmidi::Access;
 
-	match wmi.inputs() {
-		Ok(inputs) => {
-			println!("Available MIDI Inputs");
-			for (port, name) in &inputs {
-				println!("{}: {}", port, name);
-			}
-		},
-		Err(err) => println!("Error: {}", err.description())
+fn main() {
+	let acc = Access::new(0);
+
+	println!("Available MIDI Inputs");
+	for (port, input) in acc.inputs() {
+		println!("{}: {} ({:?})", port, input.name(), input.state());
 	}
 
-	let wmo = webmidi::WebMidiOutput::new(String::from("Test output Stream"));
-
-	match wmo.outputs() {
-		Ok(outputs) => {
-			println!("Available MIDI Outputs");
-			for (port, name) in &outputs {
-				println!("{}: {}", port, name);
-			}
-		},
-		Err(err) => println!("Error: {}", err.description())
+	println!("Available MIDI Outputs");
+	for (port, output) in acc.outputs() {
+		println!("{}: {} ({:?})", port, output.name(), output.state());
 	}
 }
