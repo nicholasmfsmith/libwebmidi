@@ -1,0 +1,10 @@
+[package]
+name = "webmidi"
+version = "0.1.0"
+authors = [
+	"Nicholas Cioli <nicholascioli@gmail.com>",
+	"Nicholas Smith <nicholasmfsmith@gmail.com>"
+]
+
+[dependencies]
+midir = "0.5.0"
